@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+requirements.txt
+setup.cfg
+cytocoarsening/__init__.py
+cytocoarsening/cytocoarsening.py
+cytocoarsening/evaluate.py
+cytocoarsening.egg-info/PKG-INFO
+cytocoarsening.egg-info/SOURCES.txt
+cytocoarsening.egg-info/dependency_links.txt
+cytocoarsening.egg-info/top_level.txt
