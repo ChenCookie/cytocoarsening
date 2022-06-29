@@ -33,8 +33,8 @@ Data access
 --------------
 
 -   [preeclampsia](https://zenodo.org/record/6779483#.Yrygu-zMJhF)
--   [covid]()
--   [NK cell]()
+-   [covid](https://zenodo.org/record/6780354#.Yryxg-zMJhE)
+-   [NK cell](https://zenodo.org/record/6780417#.Yry12-zMJhE)
 
 Take preeclampsia for example, if you'd want to list all of the publicly available files for download,
 ```
