@@ -29,13 +29,29 @@ git clone https://github.com/ChenCookie/cytocoarsening.git
 cd cytocoarsening
 ```
 
-Dataset
+Data access
 --------------
 
--   [What is setup.py?] on Stack Overflow
--   [Official Python Packaging User Guide](https://packaging.python.org)
--   [The Hitchhiker's Guide to Packaging]
--   [Cookiecutter template for a Python package]
+-   [preeclampsia](https://zenodo.org/record/6779483#.Yrygu-zMJhF)
+-   [covid]()
+-   [NK cell]()
+
+Take preeclampsia for example, if you'd want to list all of the publicly available files for download,
+```
+from lxml import html
+import requests
+
+r = requests.get(f'https://zenodo.org/record/6779483#.Yrygu-zMJhF')
+content = html.fromstring(r.content)
+hrefs = content.xpath('//a/@href')
+files = [i for i in hrefs if i.endswith('?download=1')]
+files = np.unique(files)
+print(files)
+```
+If you'd like to download any  preeclampsia dataset file from zenodo,
+```
+curl 'https://zenodo.org/record/6779483/files/Han-FCS_file_list.xlsx?download=1' --output Han-FCS_file_list.xlsx
+```
 
 Parameter Explanation
 --------------
