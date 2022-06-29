@@ -39,20 +39,20 @@ Dataset
 
 Parameter Explanation
 --------------
-The function can be excute at one line
+The function can be excute at one line.
 ```
 coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data,cell_label,multipass,k_nearest_neighbors)
 ```
 input
-* `cell_data` - unintegrated spliced gene expression data
-* `cell_label` - unintegrated spliced gene expression data
-* `multipass` - unintegrated spliced gene expression data
-* `k_nearest_neighbors` - unintegrated spliced gene expression data
+* `cell_data` - numpy.ndarray. The single cell data with several features. The shape of ndarray is (cell number,features number)
+* `cell_label` - numpy.ndarray. The attribute of each cell data. The shape of ndarray is (cell number,)
+* `multipass` - int. The pass number that what want the data size decrease.
+* `k_nearest_neighbors` - int. Number of neighbors in the inisial graph in each pass.
 
 output
-* `coarsening_group` - unintegrated spliced gene expression data
-* `group_edge` - unintegrated spliced gene expression data
-* `result_dicts` - unintegrated spliced gene expression data
+* `coarsening_group` - dict. The dictionary that indicate supernode as key and the node number list of the group as value in coarsening graph
+* `group_edge` - numpy.ndarray. The array that record the edge that combine two nodes
+* `result_dicts` - dict. The dictionary that save different result value, including accuracy, error rate, quadratic equation evaluation in feature and label, node number, edge number, runtime, and keypoint 
 
 Toy Example
 --------------
