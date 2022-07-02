@@ -5,10 +5,6 @@ We want to identify cell-types that are enriched for both phenotype (e.g. cell p
 
 Overview
 =======================
-<p align="center">
-  <img src="/doc/intuitive_coarsening_illustration.jpg"/>
-  <img src="/doc/Cytocoarsening.png"/>
-</p>
 
 ![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/intuitive_coarsening_illustration.jpg)
 ![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/Cytocoarsening.png)
