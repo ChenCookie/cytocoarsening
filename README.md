@@ -1,7 +1,7 @@
 📦 cytocoarsening.py
 =======================
 
-We want to identify cell-types that are enriched for both phenotype (e.g. cell phenotype) and relate to the external information. Graph-based approaches for identifying these modules can suffer in the single-cell setting because there is an extremely large number of cells profiled per sample and we often profile multiple samples with multiple different experimental conditions or timepoints.
+We want to identify cell-types that are enriched for both phenotype (e.g. cell phenotype) and relate to the external information. Graph-based approaches for identifying these modules can suffer in the single-cell setting because there is an extremely large number of cells profiled per sample and we often profile multiple samples with multiple different experimental conditions or timepoints. Here is [Cytocoarsening github link](https://github.com/ChenCookie/cytocoarsening).
 
 Overview
 =======================
@@ -10,8 +10,12 @@ Overview
   <img src="/doc/Cytocoarsening.png"/>
 </p>
 
+![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/intuitive_coarsening_illustration.jpg)
+![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/Cytocoarsening.png)
+
 Installation
 -----
+If you'd like to install by PYPI, please type this line on your command line([Cytocoarsening PYPI](https://pypi.org/project/cytocoarsening/)):
 
 ```bash
 pip install cytocoarsening

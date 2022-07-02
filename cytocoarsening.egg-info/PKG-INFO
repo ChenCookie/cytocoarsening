@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cytocoarsening
-Version: 0.0.2
+Version: 0.0.3
 Summary: cytocoarsening-graph coarsening
 Home-page: https://github.com/catchzeng/cytocoarsening
 Author: ChiJaneChen
@@ -12,68 +12,91 @@ Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-📦 setup.py (for humans)
+📦 cytocoarsening.py
 =======================
 
-This repo exists to provide [an example setup.py] file, that can be used
-to bootstrap your next Python project. It includes some advanced
-patterns and best practices for `setup.py`, as well as some
-commented–out nice–to–haves.
+We want to identify cell-types that are enriched for both phenotype (e.g. cell phenotype) and relate to the external information. Graph-based approaches for identifying these modules can suffer in the single-cell setting because there is an extremely large number of cells profiled per sample and we often profile multiple samples with multiple different experimental conditions or timepoints.
 
-For example, this `setup.py` provides a `$ python setup.py upload`
-command, which creates a *universal wheel* (and *sdist*) and uploads
-your package to [PyPi] using [Twine], without the need for an annoying
-`setup.cfg` file. It also creates/uploads a new git tag, automatically.
-
-In short, `setup.py` files can be daunting to approach, when first
-starting out — even Guido has been heard saying, "everyone cargo cults
-thems". It's true — so, I want this repo to be the best place to
-copy–paste from :)
-
-[Check out the example!][an example setup.py]
+Overview
+=======================
+<p align="center">
+  <img src="/doc/intuitive_coarsening_illustration.jpg"/>
+  <img src="/doc/Cytocoarsening.png"/>
+</p>
 
 Installation
 -----
 
 ```bash
-cd your_project
-
-# Download the setup.py file:
-#  download with wget
-wget https://raw.githubusercontent.com/navdeep-G/setup.py/master/setup.py -O setup.py
-
-#  download with curl
-curl -O https://raw.githubusercontent.com/navdeep-G/setup.py/master/setup.py
+pip install cytocoarsening
 ```
 
-To Do
------
+* Or you can clone the git repository by, 
 
--   Tests via `$ setup.py test` (if it's concise).
+```
+git clone https://github.com/ChenCookie/cytocoarsening.git
+```
 
-Pull requests are encouraged!
+* Once you've clone the repository, please change your working directory into this folder.
 
-More Resources
+```
+cd cytocoarsening
+```
+
+Data access
 --------------
 
--   [What is setup.py?] on Stack Overflow
--   [Official Python Packaging User Guide](https://packaging.python.org)
--   [The Hitchhiker's Guide to Packaging]
--   [Cookiecutter template for a Python package]
+-   [preeclampsia](https://zenodo.org/record/6779483#.Yrygu-zMJhF)
+-   [covid](https://zenodo.org/record/6780354#.Yryxg-zMJhE)
+-   [NK cell](https://zenodo.org/record/6780417#.Yry12-zMJhE)
 
-License
--------
+Take preeclampsia for example, if you'd want to list all of the publicly available files for download,
+```
+from lxml import html
+import requests
 
-This is free and unencumbered software released into the public domain.
+r = requests.get(f'https://zenodo.org/record/6779483#.Yrygu-zMJhF')
+content = html.fromstring(r.content)
+hrefs = content.xpath('//a/@href')
+files = [i for i in hrefs if i.endswith('?download=1')]
+files = np.unique(files)
+print(files)
+```
+If you'd like to download any  preeclampsia dataset file from zenodo,
+```
+curl 'https://zenodo.org/record/6779483/files/Han-FCS_file_list.xlsx?download=1' --output Han-FCS_file_list.xlsx
+```
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any means.
+Parameter Explanation
+--------------
+The function can be excute at one line.
+```
+coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data,cell_label,multipass,k_nearest_neighbors)
+```
+input
+* `cell_data` - numpy.ndarray. The single cell data with several features. The shape of ndarray is (cell number,features number)
+* `cell_label` - numpy.ndarray. The attribute of each cell data. The shape of ndarray is (cell number,)
+* `multipass` - int. The pass number that what want the data size decrease.
+* `k_nearest_neighbors` - int. Number of neighbors in the inisial graph in each pass.
 
-  [an example setup.py]: https://github.com/navdeep-G/setup.py/blob/master/setup.py
-  [PyPi]: https://docs.python.org/3/distutils/packageindex.html
-  [Twine]: https://pypi.python.org/pypi/twine
-  [image]: https://farm1.staticflickr.com/628/33173824932_58add34581_k_d.jpg
-  [What is setup.py?]: https://stackoverflow.com/questions/1471994/what-is-setup-py
-  [The Hitchhiker's Guide to Packaging]: https://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/creation.html
-  [Cookiecutter template for a Python package]: https://github.com/audreyr/cookiecutter-pypackage
+output
+* `coarsening_group` - dict. The dictionary that indicate supernode as key and the node number list of the group as value in coarsening graph
+* `group_edge` - numpy.ndarray. The array that record the edge that combine two nodes
+* `result_dicts` - dict. The dictionary that save different result value, including accuracy, error rate, quadratic equation evaluation in feature and label, node number, edge number, runtime, and keypoint 
+
+Toy Example
+--------------
+
+```
+from cytocoarsening.cytocoarsening import cytocoarsening
+import numpy as np
+import random
+
+cell_data=[[random.random() for i in range(33)] for j in range(4500)]
+cell_data=np.array(cell_data)
+
+cell_label = np.array([0] * 1000 + [1] * (3500))
+np.random.shuffle(cell_label)
+
+group,edge,diccts=cytocoarsening(cell_data,cell_label,3,5)
+```

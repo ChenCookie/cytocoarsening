@@ -148,13 +148,11 @@ def trace_node_label_form_dict(groups_dict,labelC,pass_num,k,dataC_idx,acc_str,e
     return acc_str,err_str 
 
 
-def cytocoarsening(input_dataC,input_labelC,multipass,input_k):
+def cytocoarsening(input_dataC = None,input_labelC = None,multipass = 10,input_k = 5):
     accuracy_store=list()
     error_store=list()
     qua_label_divnod_store=list()
-    # qua_label_divedg_store=list()
     qua_feature_divnod_store=list()
-    # qua_feature_divedg_store=list()
     node_store=list()
     edge_store=list()
     runtime_store=list()
@@ -269,26 +267,23 @@ def cytocoarsening(input_dataC,input_labelC,multipass,input_k):
         subgraph=build_graph(dataC_idx,store_cleanedge)
         qua_result=get_p(subgraph,input_labelC[dataC_idx])
         qua_label_divnod_store.append(qua_result/len(dataC_idx))
-        # qua_label_divedg_store.append(qua_result/len(store_cleanedge))
         edge_store.append(len(store_cleanedge))
 
         euqation_result=[]
         for i in range(0,input_dataC.shape[1],1):
             euqation_result.append(get_p(subgraph,input_dataC[dataC_idx][:,i]))
         qua_feature_divnod_store.append((sum(euqation_result) / len(euqation_result))/len(dataC_idx))
-        # qua_feature_divedg_store.append((sum(euqation_result) / len(euqation_result))/len(store_cleanedge))
 
         accuracy_store,error_store=trace_node_label_form_dict(new_groups,input_labelC,0,0,dataC_idx,accuracy_store,error_store)
         total2=time.time()
         runtime_store.append(total2-total1)
         keypoint_store.append(dataC_idx)
-        # print("get point",len(dataC_idx),count_group,total2-total1)
         if(count_group==0):
             break
 
     information_dict={'accuracy':accuracy_store,'error':error_store,'qua_label_divnod':qua_label_divnod_store,\
     'qua_feature_divnod':qua_feature_divnod_store,'node_number':node_store,'edge_number':edge_store,'runtime':runtime_store,\
-    'keypoint':keypoint_store}#'qua_feature_divedg':qua_feature_divedg_store,'qua_label_divedg':qua_label_divedg_store,
+    'keypoint':keypoint_store}
     return new_groups,store_cleanedge,information_dict
 
 
