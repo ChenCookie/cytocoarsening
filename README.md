@@ -57,13 +57,13 @@ Parameter Explanation
 --------------
 The function can be excute at one line.
 ```
-coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data = None,cell_label = None,multipass = 10,k_nearest_neighbors = 5)
+coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data,cell_label,multipass,k_nearest_neighbors)
 ```
 input
-* `cell_data` - numpy.ndarray. The single cell data with several features. The shape of ndarray is (cell number,features number)
-* `cell_label` - numpy.ndarray. The attribute of each cell data. The shape of ndarray is (cell number,)
-* `multipass` - int. The pass number that what want the data size decrease.
-* `k_nearest_neighbors` - int. Number of neighbors in the inisial graph in each pass.
+* `cell_data` - numpy.ndarray. The single cell data with several features. The shape of ndarray is (cell number,features number). Default: `cell_data = None`.
+* `cell_label` - numpy.ndarray. The attribute of each cell data. The shape of ndarray is (cell number,). Default: `cell_label = None`.
+* `multipass` - int. The pass number that what want the data size decrease. Default: `multipass = 10`.
+* `k_nearest_neighbors` - int. Number of neighbors in the inisial graph in each pass. Default: `k_nearest_neighbors = 5`.
 
 output
 * `coarsening_group` - dict. The dictionary that indicate supernode as key and the node number list of the group as value in coarsening graph
