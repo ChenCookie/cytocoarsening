@@ -57,7 +57,7 @@ Parameter Explanation
 --------------
 The function can be excute at one line.
 ```
-coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data,cell_label,multipass,k_nearest_neighbors)
+coarsening_group,group_edge,result_dicts=cytocoarsening(cell_data = None,cell_label = None,multipass = 10,k_nearest_neighbors = 5)
 ```
 input
 * `cell_data` - numpy.ndarray. The single cell data with several features. The shape of ndarray is (cell number,features number)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cytocoarsening
-Version: 0.0.4
+Version: 0.0.5
 Summary: cytocoarsening-graph coarsening
 Home-page: https://github.com/catchzeng/cytocoarsening
 Author: ChiJaneChen
@@ -20,8 +20,8 @@ We want to identify cell-types that are enriched for both phenotype (e.g. cell p
 Overview
 =======================
 
-![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/intuitive_coarsening_illustration.jpg)
-![](https://github.com/ChenCookie/cytocoarsening/blob/main/doc/Cytocoarsening.png)
+![](https://github.com/ChenCookie/cytocoarsening/raw/main/doc/intuitive_coarsening_illustration.jpg)
+![](https://github.com/ChenCookie/cytocoarsening/raw/main/doc/Cytocoarsening.png)
 
 Installation
 -----
