@@ -28,6 +28,17 @@ git clone https://github.com/ChenCookie/cytocoarsening.git
 ```
 cd cytocoarsening
 ```
+If cytocoarsening appears error or warning, please make sure the version of scipy and networkx:
+```
+scipy==1.6.2
+networkx==2.6.2
+```
+To reinstall the particular version of package
+```
+pip install --force-reinstall scipy==1.6.2
+pip install --force-reinstall networkx==2.6.2
+```
+
 
 Data access
 --------------

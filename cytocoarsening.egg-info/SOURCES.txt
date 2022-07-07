@@ -10,4 +10,5 @@ cytocoarsening/evaluate.py
 cytocoarsening.egg-info/PKG-INFO
 cytocoarsening.egg-info/SOURCES.txt
 cytocoarsening.egg-info/dependency_links.txt
+cytocoarsening.egg-info/requires.txt
 cytocoarsening.egg-info/top_level.txt
